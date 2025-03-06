@@ -19,7 +19,7 @@ const Projects = () => {
   // Define project categories
   const categories = [
     { id: 'all', label: 'All Projects' },
-    { id: 'machine-learning', label: 'Machine Learning' },
+    { id: 'machine-learning', label: 'Machine Learning/Data Analysis' },
     { id: 'web-development', label: 'Web Development' },
     { id: 'game-development', label: 'Game Development' }
   ];

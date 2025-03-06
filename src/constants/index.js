@@ -8,6 +8,7 @@ import project7 from "../assets/projects/myfirst_portfolio_web.jpg";
 import project8 from "../assets/projects/libre_e-commerce.jpg";
 import project9 from "../assets/projects/cj_shortest_path_web.jpg";
 import project10 from "../assets/projects/portfolio_web.jpg";
+import project11 from "../assets/projects/fikri-proyek-dicoding-data-analysis.streamlit.app.jpg";
 
 export const HERO_CONTENT = `Hello, I am Muhammad Fikri Wahidin, a graduate of Informatics focusing in software engineering and machine learning. With an educational background at SMK Telkom Banjarbaru and Telkom University, I have a strong foundation in programming, especially machine learning, data analysis, and web development. Let's collaborate to build a more inclusive and impactful technological future.`;
 
@@ -109,6 +110,14 @@ export const PROJECTS = [
     description:
       "Libre is a specialized e-commerce marketplace focusing on books and literary products, featuring advanced search capabilities with filtering by genre, author, and publication date. The platform includes personalized recommendation algorithms based on user browsing history and purchase patterns. Built with Laravel and MySQL, Libre incorporates a rating and review system, wishlists, and integration with major payment gateways. The responsive design ensures seamless shopping experiences across all devices.",
     technologies: ["Laravel", "MySQL", "HTML", "CSS", "PHP"],
+  },
+  {
+    title: "Data Analysis with Python - 2024",
+    type: ["web-development", "machine-learning"],
+    image: project11,
+    description:
+      "This project analyzes bike rental usage data from 2011 to 2012 using Python. Leveraging Pandas for data manipulation and Matplotlib for visualization, it provides insights into seasonal, monthly, and weather-based rental patterns. The interactive dashboard, built with Streamlit, enables users to explore trends over a selected time range, displaying key metrics such as temperature, wind speed, and humidity. Additionally, scatter plots and bar charts illustrate correlations between weather conditions and rental demand, offering a comprehensive view of user behavior.",
+    technologies: ["Python", "Pandas", "Matplotlib", "Seaborn", "Streamlit"],
   },
   {
     title: "My First Portfolio Website - 2021",
