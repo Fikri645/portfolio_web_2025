@@ -55,8 +55,17 @@ const SolarSimulation = () => {
                 transition={{duration: 1}}
                 className="text-3xl md:text-4xl my-10 md:my-20 text-center"
             >
-        Solar System
+                Explore Our Solar System
             </motion.h2>
+            
+            <motion.div
+                whileInView={{opacity: 1}}
+                initial={{opacity: 0}}
+                transition={{duration: 0.5}}
+                className="text-center max-w-2xl mx-auto mb-10"
+            >
+                <p className="text-neutral-400">This interactive model shows the planets orbiting around the sun with scientifically accurate relative speeds. Watch as the counters track how many orbits each celestial body has completed.</p>
+            </motion.div>
             
             <motion.div 
                 whileInView={{opacity: 1}}

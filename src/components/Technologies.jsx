@@ -1,7 +1,6 @@
 import { FaPython, FaLaravel, FaDatabase, FaCode } from "react-icons/fa"
 import { SiTailwindcss, SiTensorflow, SiScikitlearn, SiElasticsearch, SiBootstrap, SiMysql } from "react-icons/si"
 import { motion } from 'framer-motion';
-import SolarSimulation from './SolarSimulation';
 import { useRef } from 'react';
 import WaterSimulation from './WaterSimulation';
 
@@ -119,11 +118,6 @@ const Technologies = () => {
                     <span className="text-sm mt-2">Bootstrap</span>
                 </motion.div>
             </motion.div>
-            
-            {/* Solar System Simulation */}
-            <SolarSimulation />
-
-            
         </div>
     )
 }
