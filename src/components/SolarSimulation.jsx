@@ -1,245 +1,51 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const SolarSimulation = () => {
-    const [celestialBodies, setCelestialBodies] = useState([]);
-    const containerRef = useRef(null);
-    const [sunPosition, setSunPosition] = useState({ x: 0, y: 0 });
-    const [isOrbiting, setIsOrbiting] = useState(false);
-    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-    const [isMobile, setIsMobile] = useState(false);
-    
-    // Solar system data with focus on visibility - dramatically spaced out
-    const planets = [
-        { name: "Mercury", relativeSize: 1.2, relativeOrbitSpeed: 1.59, color: "#B7B8B9", distance: 8.0 },
-        { name: "Venus", relativeSize: 1.2, relativeOrbitSpeed: 1.18, color: "#E7CDCD", distance: 12.0 },
-        { name: "Earth", relativeSize: 1.2, relativeOrbitSpeed: 1, color: "#6B93D6", distance: 16.0 },
-        { name: "Mars", relativeSize: 1.2, relativeOrbitSpeed: 0.81, color: "#C1440E", distance: 20.0 },
-        { name: "Jupiter", relativeSize: 1.8, relativeOrbitSpeed: 0.44, color: "#E3DCCB", distance: 26.0 },
-        { name: "Saturn", relativeSize: 1.6, relativeOrbitSpeed: 0.32, color: "#EDC373", distance: 32.0 },
-        { name: "Uranus", relativeSize: 1.4, relativeOrbitSpeed: 0.23, color: "#D1E7E7", distance: 38.0 },
-        { name: "Neptune", relativeSize: 1.4, relativeOrbitSpeed: 0.18, color: "#5B5DDF", distance: 44.0 }
-    ];
-    
-    // Check for mobile/small screens and handle resize events
+  // Orbit counters
+  const [mercuryOrbits, setMercuryOrbits] = useState(0);
+  const [venusOrbits, setVenusOrbits] = useState(0);
+  const [earthOrbits, setEarthOrbits] = useState(0);
+  const [marsOrbits, setMarsOrbits] = useState(0);
+  const [jupiterOrbits, setJupiterOrbits] = useState(0);
+  const [saturnOrbits, setSaturnOrbits] = useState(0);
+  const [uranusOrbits, setUranusOrbits] = useState(0);
+  const [neptuneOrbits, setNeptuneOrbits] = useState(0);
+  const [moonOrbits, setMoonOrbits] = useState(0);
+  
+  // Animation references
+  const animationRef = useRef(null);
+  const startTimeRef = useRef(Date.now());
+  
+  // Update orbit counters
     useEffect(() => {
-        const checkMobile = () => {
-            const mobile = window.innerWidth < 768;
-            setIsMobile(mobile);
-            
-            // If switching to mobile, ensure interactive mode is disabled
-            if (mobile && isOrbiting) {
-                setIsOrbiting(false);
-            }
-        };
-        
-        // Initial check
-        checkMobile();
-        
-        // Set up resize listener
-        window.addEventListener('resize', handleResize);
-        
-        function handleResize() {
-            checkMobile();
-            initializeSystem();
-        }
-        
-        return () => window.removeEventListener('resize', handleResize);
-    }, [isOrbiting]);
-    
-    // Initialize the solar system
-    const initializeSystem = () => {
-        if (!containerRef.current) return;
-        
-        const width = containerRef.current.offsetWidth;
-        const height = containerRef.current.offsetHeight;
-        setDimensions({ width, height });
-        
-        // Center position
-        const centerX = width / 2;
-        const centerY = height / 2;
-        setSunPosition({ x: centerX, y: centerY });
-        
-        // Scale factor to fit all planets in view - adjusts based on screen size
-        const maxDistance = Math.max(...planets.map(p => p.distance));
-        const isMobileView = window.innerWidth < 768;
-        const scaleFactor = Math.min(width, height) * (isMobileView ? 0.35 : 0.45) / maxDistance;
-        
-        // Fixed size for all planets - smaller on mobile
-        const baseSize = Math.min(width, height) * (isMobileView ? 0.012 : 0.016);
-        
-        const bodies = planets.map((planet, index) => {
-            // Evenly distribute planets around their orbits for initial setup
-            const angle = (index / planets.length) * Math.PI * 2;
-            const orbitRadius = planet.distance * scaleFactor;
-            
-            // Calculate position based on angle and distance
-            const x = centerX + Math.cos(angle) * orbitRadius;
-            const y = centerY + Math.sin(angle) * orbitRadius;
-            
-            // Calculate orbital speed (radians per frame)
-            const baseSpeed = 0.005; // Base speed for Earth
-            const speed = baseSpeed * planet.relativeOrbitSpeed;
-            
-            // Calculate size - focusing more on visibility than accurate relative sizes
-            const size = baseSize * planet.relativeSize;
-            
-            // Calculate trail density inversely proportional to speed
-            // Slower planets will leave more frequent trail points
-            const trailDensity = Math.ceil(0.2 / planet.relativeOrbitSpeed);
-            
-            return {
-                id: index,
-                name: planet.name,
-                x,
-                y,
-                angle,
-                orbitRadius,
-                orbitSpeed: speed,
-                size: size,
-                color: planet.color,
-                trail: [], // Initialize an empty trail
-                maxTrailLength: isMobileView ? 60 : 100, // Fewer trail points on mobile
-                trailDensity: trailDensity,
-                frameCount: 0,
-                revolutionCount: 0,
-                lastAngleQuadrant: Math.floor(angle / (Math.PI/2)),
-            };
-        });
-        
-        setCelestialBodies(bodies);
+    const updateOrbitCounts = () => {
+      const currentTime = Date.now();
+      const elapsedSeconds = (currentTime - startTimeRef.current) / 1000;
+      
+      // Calculate orbits based on orbital periods (animations)
+      setMercuryOrbits(Math.floor(elapsedSeconds / 2.4));
+      setVenusOrbits(Math.floor(elapsedSeconds / 6.2));
+      setEarthOrbits(Math.floor(elapsedSeconds / 10));
+      setMarsOrbits(Math.floor(elapsedSeconds / 18.8));
+      setJupiterOrbits(Math.floor(elapsedSeconds / 120));
+      setSaturnOrbits(Math.floor(elapsedSeconds / 290));
+      setUranusOrbits(Math.floor(elapsedSeconds / 840));
+      setNeptuneOrbits(Math.floor(elapsedSeconds / 1650));
+      // Moon orbits Earth ~13 times per Earth year
+      setMoonOrbits(Math.floor(elapsedSeconds / (10/13)));
+      
+      animationRef.current = requestAnimationFrame(updateOrbitCounts);
     };
     
-    // Initialize on mount and when container ref is available
-    useEffect(() => {
-        initializeSystem();
-    }, [containerRef.current]);
-    
-    // Physics animation loop
-    useEffect(() => {
-        if (celestialBodies.length === 0) return;
-        
-        let animationFrameId;
-        
-        const updateOrbits = () => {
-            setCelestialBodies(bodies => {
-                // If orbiting, sun position follows mouse
-                const center = isOrbiting ? sunPosition : { 
-                    x: dimensions.width / 2, 
-                    y: dimensions.height / 2 
-                };
-                
-                return bodies.map(body => {
-                    // Update angle based on orbital speed
-                    const newAngle = body.angle + body.orbitSpeed;
-                    
-                    // Calculate new position
-                    const x = center.x + Math.cos(newAngle) * body.orbitRadius;
-                    const y = center.y + Math.sin(newAngle) * body.orbitRadius;
-                    
-                    // Increment frame counter
-                    const frameCount = body.frameCount + 1;
-                    
-                    // Check for revolution completion by monitoring quadrant transitions
-                    // Specifically detect crossing from 4th quadrant back to 1st quadrant
-                    const currentQuadrant = Math.floor(newAngle % (2 * Math.PI) / (Math.PI/2));
-                    let revolutionCount = body.revolutionCount;
-                    
-                    // Detect when we cross from quadrant 3 to quadrant 0 (complete revolution)
-                    if (body.lastAngleQuadrant === 3 && currentQuadrant === 0) {
-                        revolutionCount += 1;
-                    }
-                    
-                    // Determine whether to add a trail point based on trailDensity
-                    // Slower planets will add points more frequently
-                    let trail = [...body.trail];
-                    
-                    if (frameCount % Math.max(1, Math.floor(5 / body.trailDensity)) === 0) {
-                        if (trail.length >= body.maxTrailLength) {
-                            trail.shift();
-                        }
-                        trail.push({ x, y });
-                    }
-                    
-                    return { 
-                        ...body, 
-                        x, 
-                        y, 
-                        angle: newAngle,
-                        trail,
-                        frameCount,
-                        revolutionCount,
-                        lastAngleQuadrant: currentQuadrant
-                    };
-                });
-            });
-            
-            animationFrameId = requestAnimationFrame(updateOrbits);
-        };
-        
-        animationFrameId = requestAnimationFrame(updateOrbits);
+    animationRef.current = requestAnimationFrame(updateOrbitCounts);
         
         return () => {
-            cancelAnimationFrame(animationFrameId);
-        };
-    }, [celestialBodies.length, sunPosition, isOrbiting, dimensions]);
-    
-    // Handle mouse events - only enable on desktop
-    const handleMouseMove = (e) => {
-        if (isMobile || !containerRef.current) return;
-        
-        const rect = containerRef.current.getBoundingClientRect();
-        setSunPosition({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        });
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
-    
-    const handleMouseDown = () => {
-        if (!isMobile) {
-            setIsOrbiting(true);
-        }
-    };
-    
-    const handleMouseUp = () => {
-        if (!isMobile) {
-            setIsOrbiting(false);
-        }
-    };
-    
-    // Calculate the current sun position (center when not orbiting, mouse position when orbiting)
-    const currentSunPosition = isOrbiting 
-        ? sunPosition 
-        : { x: dimensions.width / 2, y: dimensions.height / 2 };
-    
-    // Make the sun clearly larger than Jupiter
-    // Find Jupiter's size (if present) to ensure sun is larger
-    const jupiterSize = celestialBodies.find(body => body.name === "Jupiter")?.size || 0;
-    const sunSize = Math.max(
-        Math.min(dimensions.width, dimensions.height) * (isMobile ? 0.055 : 0.07), // Smaller on mobile
-        jupiterSize * 2.2
-    );
-    const sunRadius = sunSize / 2;
-    
-    // Helper function to determine trail thickness based on planet size
-    const getTrailThickness = (body) => {
-        // Make trail thickness proportional to planet size
-        // Much thinner than before and scaled to planet size
-        const baseFactor = isMobile ? 0.2 : 0.3;
-        return Math.max(0.5, body.size * baseFactor);
-    };
-    
-    // Helper function to determine trail opacity based on planet speed
-    const getTrailOpacity = (orbitSpeed) => {
-        // Make trails more transparent overall
-        // But still inversely proportional to speed so slower planets have more visible trails
-        return Math.min(0.4, Math.max(0.15, 0.1 / orbitSpeed));
-    };
-    
-    // Determine appropriate container height based on screen size
-    const containerHeight = isMobile 
-        ? "h-[350px]" // Smaller height on mobile
-        : "h-[600px]"; // Normal height on desktop
+  }, []);
     
     return (
         <div className="w-full mb-20">
@@ -249,7 +55,7 @@ const SolarSimulation = () => {
                 transition={{duration: 1}}
                 className="text-3xl md:text-4xl my-10 md:my-20 text-center"
             >
-                Interactive Solar System
+        Solar System
             </motion.h2>
             
             <motion.div 
@@ -258,115 +64,519 @@ const SolarSimulation = () => {
                 transition={{duration: 1}}
                 className="mx-auto max-w-full md:max-w-5xl px-2 md:px-0"
             >
-                <div 
-                    ref={containerRef}
-                    className={`relative w-full ${containerHeight} rounded-2xl border-4 border-neutral-800 overflow-hidden bg-black`}
-                    onMouseMove={handleMouseMove}
-                    onMouseDown={handleMouseDown}
-                    onMouseUp={handleMouseUp}
-                    onMouseLeave={handleMouseUp}
-                    onTouchStart={isMobile ? undefined : handleMouseDown}
-                    onTouchEnd={isMobile ? undefined : handleMouseUp}
-                    onTouchMove={isMobile ? undefined : handleMouseMove}
-                >
-                    {/* Orbit circles */}
-                    {!isOrbiting && celestialBodies.map(body => (
-                        <div 
-                            key={`orbit-${body.id}`}
-                            className="absolute rounded-full border border-gray-800"
-                            style={{
-                                width: body.orbitRadius * 2,
-                                height: body.orbitRadius * 2,
-                                left: dimensions.width / 2 - body.orbitRadius,
-                                top: dimensions.height / 2 - body.orbitRadius,
-                            }}
-                        />
-                    ))}
-                    
-                    {/* Trails for all planets - with thickness based on planet size and increased transparency */}
-                    {celestialBodies.map(body => (
-                        body.trail.length > 0 && (
-                            <svg key={`trail-${body.id}`} className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-                                <path
-                                    d={`M ${body.trail[0].x} ${body.trail[0].y} ${body.trail.map(point => `L ${point.x} ${point.y}`).join(' ')}`}
-                                    stroke={body.color}
-                                    strokeWidth={getTrailThickness(body)}
-                                    strokeOpacity={getTrailOpacity(body.orbitSpeed)}
-                                    fill="none"
-                                />
-                            </svg>
-                        )
-                    ))}
-                    
-                    {/* The Sun - always visible and properly sized */}
-                    <motion.div
-                        className="absolute rounded-full z-10"
-                        style={{
-                            width: sunSize,
-                            height: sunSize,
-                            backgroundColor: "#FDB813",
-                            boxShadow: `0 0 ${sunRadius}px #FDB813, 0 0 ${sunSize}px #FDB813`,
-                            x: currentSunPosition.x - sunRadius,
-                            y: currentSunPosition.y - sunRadius
-                        }}
-                        initial={false}
-                        animate={{
-                            x: currentSunPosition.x - sunRadius,
-                            y: currentSunPosition.y - sunRadius
-                        }}
-                        transition={{
-                            duration: 0,
-                            ease: "linear"
-                        }}
-                    />
+        <div className="relative w-full h-[800px] md:h-[900px] rounded-2xl border-4 border-neutral-800 overflow-hidden bg-black flex items-center justify-center">
+          <div className="solar-system">
+            {/* Sun */}
+            <div className="sun"></div>
+            
+            {/* Orbit Paths */}
+            <div className="orbit mercury-path"></div>
+            <div className="orbit venus-path"></div>
+            <div className="orbit earth-path"></div>
+            <div className="orbit mars-path"></div>
+            <div className="orbit jupiter-path"></div>
+            <div className="orbit saturn-path"></div>
+            <div className="orbit uranus-path"></div>
+            <div className="orbit neptune-path"></div>
                     
                     {/* Planets */}
-                    {celestialBodies.map(body => (
-                        <motion.div
-                            key={body.id}
-                            className="absolute rounded-full z-5"
-                            style={{
-                                width: body.size * 2,
-                                height: body.size * 2,
-                                backgroundColor: body.color,
-                                boxShadow: `0 0 ${body.size}px ${body.color}`,
-                                x: body.x - body.size,
-                                y: body.y - body.size,
-                            }}
-                            initial={false}
-                            animate={{
-                                x: body.x - body.size,
-                                y: body.y - body.size
-                            }}
-                            transition={{
-                                duration: 0,
-                                ease: "linear"
-                            }}
-                        >
-                            {/* Planet name labels with revolution counter - smaller on mobile */}
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 text-[8px] md:text-xs text-white whitespace-nowrap font-semibold">
-                                <span className="opacity-90">{body.name}</span>
-                                <span className="ml-1 opacity-70 bg-black bg-opacity-40 px-1 rounded">
-                                    {body.revolutionCount}
-                                </span>
+            <div className="planet mercury">
+              <div className="planet-label">Mercury <span className="orbit-count">{mercuryOrbits}</span></div>
+            </div>
+            
+            <div className="planet venus">
+              <div className="planet-label">Venus <span className="orbit-count">{venusOrbits}</span></div>
+            </div>
+            
+            <div className="planet earth">
+              <div className="planet-label">Earth <span className="orbit-count">{earthOrbits}</span></div>
+              <div className="moon">
+                <div className="moon-label">Moon <span className="orbit-count">{moonOrbits}</span></div>
+              </div>
+            </div>
+            
+            <div className="planet mars">
+              <div className="planet-label">Mars <span className="orbit-count">{marsOrbits}</span></div>
+            </div>
+            
+            <div className="planet jupiter">
+              <div className="planet-label">Jupiter <span className="orbit-count">{jupiterOrbits}</span></div>
+            </div>
+            
+            <div className="planet saturn">
+              <div className="planet-label">Saturn <span className="orbit-count">{saturnOrbits}</span></div>
+              <div className="saturn-ring"></div>
+            </div>
+            
+            <div className="planet uranus">
+              <div className="planet-label">Uranus <span className="orbit-count">{uranusOrbits}</span></div>
+            </div>
+            
+            <div className="planet neptune">
+              <div className="planet-label">Neptune <span className="orbit-count">{neptuneOrbits}</span></div>
+            </div>
                             </div>
-                        </motion.div>
-                    ))}
                 </div>
                 
                 <div className="mt-4 md:mt-6 flex justify-center flex-wrap gap-2 md:gap-3">
                     <div className="flex items-center gap-1 text-xs md:text-sm">
-                        <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full" style={{ backgroundColor: "#FDB813" }}></span>
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#FDB813]"></span>
                         <span className="text-neutral-400">Sun</span>
                     </div>
-                    {planets.map((planet, index) => (
-                        <div key={index} className="flex items-center gap-1 text-xs md:text-sm">
-                            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full" style={{ backgroundColor: planet.color }}></span>
-                            <span className="text-neutral-400">{planet.name}</span>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#B7B8B9]"></span>
+            <span className="text-neutral-400">Mercury: {mercuryOrbits} orbits</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#E7CDCD]"></span>
+            <span className="text-neutral-400">Venus: {venusOrbits} orbits</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#6B93D6]"></span>
+            <span className="text-neutral-400">Earth: {earthOrbits} orbits</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#CCCCCC]"></span>
+            <span className="text-neutral-400">Moon: {moonOrbits} orbits</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#C1440E]"></span>
+            <span className="text-neutral-400">Mars: {marsOrbits} orbits</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#E3DCCB]"></span>
+            <span className="text-neutral-400">Jupiter: {jupiterOrbits} orbits</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#EDC373]"></span>
+            <span className="text-neutral-400">Saturn: {saturnOrbits} orbits</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#D1E7E7]"></span>
+            <span className="text-neutral-400">Uranus: {uranusOrbits} orbits</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs md:text-sm">
+            <span className="inline-block w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#5B5DDF]"></span>
+            <span className="text-neutral-400">Neptune: {neptuneOrbits} orbits</span>
                         </div>
-                    ))}
                 </div>
-            </motion.div>
+        
+        <div className="mt-6 text-center text-xs md:text-sm text-neutral-400">
+          <p>Orbital speeds and distances are proportionally based on real astronomical data.</p>
+          <p>1 Earth year = 10 seconds in animation time.</p>
+          <p>The Moon orbits Earth ~13 times per Earth year.</p>
+        </div>
+        
+        {/* CSS for orbits and animations */}
+        <style jsx>{`
+          .solar-system {
+            position: relative;
+            width: 100%;
+            height: 100%;
+          }
+          
+          .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background-color: #FDB813;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #FDB813, 0 0 80px #FDB813;
+            z-index: 100;
+          }
+          
+          .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+          }
+          
+          /* Scale: 1 AU (Earth's distance) = 100px */
+          .mercury-path {
+            width: 120px;
+            height: 120px;
+          }
+          
+          .venus-path {
+            width: 200px;
+            height: 200px;
+          }
+          
+          .earth-path {
+            width: 280px;
+            height: 280px;
+          }
+          
+          .mars-path {
+            width: 380px;
+            height: 380px;
+          }
+          
+          /* Gas giants are scaled differently due to size constraints */
+          .jupiter-path {
+            width: 480px;
+            height: 480px;
+          }
+          
+          .saturn-path {
+            width: 580px;
+            height: 580px;
+          }
+          
+          .uranus-path {
+            width: 680px;
+            height: 680px;
+          }
+          
+          .neptune-path {
+            width: 780px;
+            height: 780px;
+          }
+          
+          .planet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            transform-origin: 0 0;
+            z-index: 10;
+          }
+          
+          .planet-label {
+            position: absolute;
+            white-space: nowrap;
+            color: white;
+            font-size: 12px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 7px;
+          }
+          
+          .orbit-count {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 0 4px;
+            margin-left: 3px;
+            font-size: 10px;
+          }
+          
+          /* Planet sizes are relative to Earth = 14px (doubled from 7px) */
+          .mercury {
+            width: 6px;
+            height: 6px;
+            margin-top: -3px;
+            margin-left: -3px;
+            background-color: #B7B8B9;
+            box-shadow: 0 0 7px #B7B8B9;
+            animation: orbit 2.4s linear infinite;
+            animation-name: mercury-orbit;
+          }
+          
+          .venus {
+            width: 12px;
+            height: 12px;
+            margin-top: -6px;
+            margin-left: -6px;
+            background-color: #E7CDCD;
+            box-shadow: 0 0 7px #E7CDCD;
+            animation: orbit 6.2s linear infinite;
+            animation-name: venus-orbit;
+          }
+          
+          .earth {
+            width: 14px;
+            height: 14px;
+            margin-top: -7px;
+            margin-left: -7px;
+            background-color: #6B93D6;
+            box-shadow: 0 0 7px #6B93D6;
+            animation: orbit 10s linear infinite;
+            animation-name: earth-orbit;
+          }
+          
+          .moon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            margin-top: -2px;
+            margin-left: -2px;
+            background-color: #CCCCCC;
+            border-radius: 50%;
+            box-shadow: 0 0 4px #CCCCCC;
+            animation: moon-orbit 0.77s linear infinite;
+            transform-origin: 0 0;
+            z-index: 11;
+          }
+          
+          .moon-label {
+            position: absolute;
+            white-space: nowrap;
+            color: white;
+            font-size: 10px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 4px;
+          }
+          
+          .mars {
+            width: 8px;
+            height: 8px;
+            margin-top: -4px;
+            margin-left: -4px;
+            background-color: #C1440E;
+            box-shadow: 0 0 7px #C1440E;
+            animation: orbit 18.8s linear infinite;
+            animation-name: mars-orbit;
+          }
+          
+          .jupiter {
+            width: 30px;
+            height: 30px;
+            margin-top: -15px;
+            margin-left: -15px;
+            background-color: #E3DCCB;
+            box-shadow: 0 0 10px #E3DCCB;
+            animation: orbit 120s linear infinite;
+            animation-name: jupiter-orbit;
+          }
+          
+          .saturn {
+            width: 26px;
+            height: 26px;
+            margin-top: -13px;
+            margin-left: -13px;
+            background-color: #EDC373;
+            box-shadow: 0 0 10px #EDC373;
+            animation: orbit 290s linear infinite;
+            animation-name: saturn-orbit;
+          }
+          
+          .saturn-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 8px;
+            margin-top: -4px;
+            margin-left: -30px;
+            background-color: rgba(237, 195, 115, 0.5);
+            border-radius: 50%;
+            transform: rotate(30deg);
+            box-shadow: 0 0 7px rgba(237, 195, 115, 0.3);
+          }
+          
+          .uranus {
+            width: 22px;
+            height: 22px;
+            margin-top: -11px;
+            margin-left: -11px;
+            background-color: #D1E7E7;
+            box-shadow: 0 0 9px #D1E7E7;
+            animation: orbit 840s linear infinite;
+            animation-name: uranus-orbit;
+          }
+          
+          .neptune {
+            width: 20px;
+            height: 20px;
+            margin-top: -10px;
+            margin-left: -10px;
+            background-color: #5B5DDF;
+            box-shadow: 0 0 9px #5B5DDF;
+            animation: orbit 1650s linear infinite;
+            animation-name: neptune-orbit;
+          }
+          
+          @keyframes orbit {
+            0% {
+              transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(var(--orbit-radius)) rotate(-360deg);
+            }
+          }
+          
+          @keyframes mercury-orbit {
+            0% {
+              transform: rotate(0deg) translate(60px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(60px) rotate(-360deg);
+            }
+          }
+          
+          @keyframes venus-orbit {
+            0% {
+              transform: rotate(0deg) translate(100px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(100px) rotate(-360deg);
+            }
+          }
+          
+          @keyframes earth-orbit {
+            0% {
+              transform: rotate(0deg) translate(140px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(140px) rotate(-360deg);
+            }
+          }
+          
+          @keyframes moon-orbit {
+            0% {
+              transform: rotate(0deg) translate(15px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(15px) rotate(-360deg);
+            }
+          }
+          
+          @keyframes mars-orbit {
+            0% {
+              transform: rotate(0deg) translate(190px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(190px) rotate(-360deg);
+            }
+          }
+          
+          @keyframes jupiter-orbit {
+            0% {
+              transform: rotate(0deg) translate(240px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(240px) rotate(-360deg);
+            }
+          }
+          
+          @keyframes saturn-orbit {
+            0% {
+              transform: rotate(0deg) translate(290px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(290px) rotate(-360deg);
+            }
+          }
+          
+          @keyframes uranus-orbit {
+            0% {
+              transform: rotate(0deg) translate(340px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(340px) rotate(-360deg);
+            }
+          }
+          
+          @keyframes neptune-orbit {
+            0% {
+              transform: rotate(0deg) translate(390px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translate(390px) rotate(-360deg);
+            }
+          }
+          
+          @media (max-width: 768px) {
+            .mercury-path { width: 80px; height: 80px; }
+            .venus-path { width: 120px; height: 120px; }
+            .earth-path { width: 160px; height: 160px; }
+            .mars-path { width: 200px; height: 200px; }
+            .jupiter-path { width: 240px; height: 240px; }
+            .saturn-path { width: 280px; height: 280px; }
+            .uranus-path { width: 320px; height: 320px; }
+            .neptune-path { width: 360px; height: 360px; }
+            
+            @keyframes mercury-orbit {
+              0% {
+                transform: rotate(0deg) translate(40px) rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg) translate(40px) rotate(-360deg);
+              }
+            }
+            
+            @keyframes venus-orbit {
+              0% {
+                transform: rotate(0deg) translate(60px) rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg) translate(60px) rotate(-360deg);
+              }
+            }
+            
+            @keyframes earth-orbit {
+              0% {
+                transform: rotate(0deg) translate(80px) rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg) translate(80px) rotate(-360deg);
+              }
+            }
+            
+            @keyframes mars-orbit {
+              0% {
+                transform: rotate(0deg) translate(100px) rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg) translate(100px) rotate(-360deg);
+              }
+            }
+            
+            @keyframes jupiter-orbit {
+              0% {
+                transform: rotate(0deg) translate(120px) rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg) translate(120px) rotate(-360deg);
+              }
+            }
+            
+            @keyframes saturn-orbit {
+              0% {
+                transform: rotate(0deg) translate(140px) rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg) translate(140px) rotate(-360deg);
+              }
+            }
+            
+            @keyframes uranus-orbit {
+              0% {
+                transform: rotate(0deg) translate(160px) rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg) translate(160px) rotate(-360deg);
+              }
+            }
+            
+            @keyframes neptune-orbit {
+              0% {
+                transform: rotate(0deg) translate(180px) rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg) translate(180px) rotate(-360deg);
+              }
+            }
+            
+            .sun {
+              width: 60px;
+              height: 60px;
+            }
+          }
+        `}</style>
+      </motion.div>
         </div>
     );
 };
