@@ -42,7 +42,7 @@ export const EXPERIENCES = [
     year: "September 2021 - March 2025",
     role: "Informatics Student",
     company: "Telkom University",
-    description: `Pursued undergraduate education in Informatics at Telkom University, building upon my high school specialization. Developed comprehensive expertise in Programming, Computing Systems, and Computer Logic Processes. Applied theoretical knowledge through practical projects, gaining proficiency in multiple programming languages and frameworks while developing strong analytical and problem-solving skills essential for software development and systems engineering.`,
+    description: `Pursued undergraduate education in Informatics at Telkom University, building upon my high school specialization. Developed comprehensive expertise in Programming, Computing Systems, and Computer Logic Processes. Applied theoretical knowledge through practical projects, gaining proficiency in multiple programming languages and frameworks while developing strong analytical and problem-solving skills essential for software development and systems engineering. Earned my degree within 3.5 years (7 semesters) with OPES Scholarship, graduating with Summa Cum Laude honors.`,
     technologies: ["Python", "R", "GoLang", "C++", "C", "Java", "Laravel", "MySQL", "Cyber Security"],
   },
   {
