@@ -9,6 +9,10 @@ import project8 from "../assets/projects/libre_e-commerce.jpg";
 import project9 from "../assets/projects/cj_shortest_path_web.jpg";
 import project10 from "../assets/projects/portfolio_web.jpg";
 import project11 from "../assets/projects/fikri-proyek-dicoding-data-analysis.streamlit.app.jpg";
+import projectMovieRecsys from "../assets/projects/movie_recsys.jpg";
+import projectDemandForecasting from "../assets/projects/demand_forecasting.jpg";
+import projectChurnPrediction from "../assets/projects/churn_prediction.jpg";
+import projectPhilosopherChat from "../assets/projects/philosopher_chat.jpg";
 
 export const HERO_CONTENT = `Hello, I am Muhammad Fikri Wahidin, a graduate of Informatics focusing in software engineering and machine learning. With an educational background at SMK Telkom Banjarbaru and Telkom University, I have a strong foundation in programming, especially machine learning, data analysis, and web development. Let's collaborate to build a more inclusive and impactful technological future.`;
 
@@ -19,6 +23,13 @@ During my studies, I studied areas such as machine learning (building predictive
 My vision is to contribute to the advancement of Indonesian technology by encouraging sustainable innovation, accessibility for all, and security in the digital era. Let's connect and explore opportunities to create impact together through technology.`;
 
 export const EXPERIENCES = [
+  {
+    year: "November 2025 - May 2026",
+    role: "Data Scientist Intern",
+    company: "Netmonk (Telkom Indonesia — DDP)",
+    description: `Developed and deployed core AI modules for Mona, Netmonk's network-monitoring chatbot used in Telkom Indonesia's production environment. Rebuilt the NLU (Natural Language Understanding) pipeline from a TF-IDF/SVM baseline to a sentence-embedding + KNN classifier, improving intent classification accuracy by over 20% on ambiguous queries. Built a Named Entity Recognition (NER) module using SpaCy to extract network entities (IP addresses, device names, metric types) from free-text user inputs. Engineered a production TTS (Text-to-Speech) service using ONNX-optimized models, reducing inference latency by 60% compared to the previous REST-based approach. Applied LLM-based data augmentation to expand the training dataset for low-resource intents, resulting in more robust model performance across edge cases.`,
+    technologies: ["Python", "SpaCy", "ONNX", "FastAPI", "Sentence Transformers", "LLM", "PostgreSQL", "MongoDB"],
+  },
   {
     year: "September 2024 - November 2024",
     role: "Data Analyst Intern",
@@ -63,6 +74,46 @@ export const EXPERIENCES = [
 ];
 
 export const PROJECTS = [
+  {
+    title: "Movie Recommendation System - 2026",
+    type: ["machine-learning"],
+    image: projectMovieRecsys,
+    description:
+      "A two-stage recommendation pipeline on MovieLens 1M (1M ratings, 6K users, 3.7K movies). Stage 1: Two-Tower neural retrieval model (PyTorch, BPR loss, in-batch negative sampling) encodes users and items into a shared embedding space for fast ANN retrieval. Stage 2: LightGBM LambdaRank re-ranks the top-100 candidates using rich features (retrieval score, user history, item popularity, genre signals). Final model achieves NDCG@10 = 0.1083, outperforming standalone ALS by +10% and bare Two-Tower by +173%. Includes MLflow tracking, FastAPI serving, 60 unit tests, GitHub Actions CI, and a live Gradio demo on HuggingFace Spaces.",
+    technologies: ["PyTorch", "LightGBM", "FastAPI", "MLflow", "Gradio", "Docker", "GitHub Actions"],
+    github: "https://github.com/Fikri645/movie-recsys",
+    demo: "https://huggingface.co/spaces/fikri0o0/movie-recsys",
+  },
+  {
+    title: "Demand Forecasting - 2026",
+    type: ["machine-learning"],
+    image: projectDemandForecasting,
+    description:
+      "Retail demand forecasting on the M5 Walmart dataset (42,840 time series, 5 years). Compares 8 models from a Seasonal Naive baseline to Amazon Chronos-2 (2025 SOTA foundation model), with a final ensemble achieving RMSLE 0.1610. Key techniques: recursive multi-step forecasting with lag/rolling/calendar features (LightGBM), fine-tuned Chronos-2 using Seq2SeqTrainer, conformal prediction intervals for uncertainty quantification, and PSI-based drift monitoring. Full MLOps stack: MLflow experiment tracking, FastAPI serving, Docker, GitHub Actions CI, and Gradio live demo on HuggingFace Spaces.",
+    technologies: ["LightGBM", "Chronos-2", "HuggingFace Transformers", "FastAPI", "MLflow", "Docker", "Gradio"],
+    github: "https://github.com/Fikri645/demand-forecasting",
+    demo: "https://huggingface.co/spaces/fikri0o0/demand-forecasting",
+  },
+  {
+    title: "Churn Prediction - 2026",
+    type: ["machine-learning"],
+    image: projectChurnPrediction,
+    description:
+      "End-to-end customer churn prediction on a telecom dataset (21 features, ~7K customers, 14.5% churn rate). Benchmarks 4 models (Logistic Regression, Random Forest, XGBoost, LightGBM) with Optuna hyperparameter optimization. Addresses class imbalance via SMOTE and cost-sensitive learning. Key highlights: SHAP explainability for global feature importance and individual prediction breakdowns, calibrated probability scores, and business-cost threshold optimization (profit-maximizing cutoff vs. default 0.5). Deployed with FastAPI + MLflow + Docker, live Gradio demo on HuggingFace Spaces.",
+    technologies: ["XGBoost", "LightGBM", "SHAP", "Optuna", "FastAPI", "MLflow", "Docker", "Gradio"],
+    github: "https://github.com/Fikri645/churn-prediction",
+    demo: "https://huggingface.co/spaces/fikri0o0/churn-prediction",
+  },
+  {
+    title: "Philosopher Chat (RAG Chatbot) - 2026",
+    type: ["machine-learning"],
+    image: projectPhilosopherChat,
+    description:
+      "A production-grade Retrieval-Augmented Generation (RAG) chatbot grounded in primary texts of Western philosophers (Nietzsche, Schopenhauer, Hume, Russell). Built a 3-stage pipeline: dense retrieval (EmbeddingGemma 768-dim) + BM25 sparse retrieval → Reciprocal Rank Fusion → BGE cross-encoder reranking → Gemma 4 generation. Evaluated rigorously with RAGAS (faithfulness, answer relevancy, context precision, context recall) across all 3 ablation stages. Reranking delivered the biggest measurable gain (+0.14 Context Recall). Includes multi-provider model comparison tab and Corrective RAG for hallucination prevention. Live on HuggingFace Spaces with ~5,735 indexed chunks.",
+    technologies: ["LangChain", "ChromaDB", "EmbeddingGemma", "BGE Reranker", "Gemma 4", "RAGAS", "Gradio"],
+    github: "https://github.com/Fikri645/philosopher-chat",
+    demo: "https://huggingface.co/spaces/fikri0o0/philosopher-chat",
+  },
   {
     title: "Harvest Scan (Plant Disease Detection) - 2024",
     type: ["machine-learning"],
