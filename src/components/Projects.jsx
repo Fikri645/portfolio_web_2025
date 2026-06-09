@@ -83,14 +83,20 @@ const Projects = () => {
             {currentProjects.map((project, index) => (
                 <motion.div whileInView={{opacity: 1, x: 0}} initial={{opacity: 0, x: -100}} transition={{duration: 1}} className="mb-8 flex flex-wrap lg:justify-center" key={index}>
                     <motion.div className="w-full lg:w-1/4">
-                        <img 
-                          src={project.image} 
-                          alt={project.title} 
-                          width={150} 
-                          height={150} 
-                          className="mb-6 rounded cursor-pointer hover:opacity-80 transition-opacity" 
-                          onClick={() => openModal(project.image)}
-                        />
+                        {project.image ? (
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            width={150}
+                            height={150}
+                            className="mb-6 rounded cursor-pointer hover:opacity-80 transition-opacity"
+                            onClick={() => openModal(project.image)}
+                          />
+                        ) : (
+                          <div className="mb-6 w-[150px] h-[150px] rounded bg-neutral-800 flex items-center justify-center text-neutral-500 text-xs text-center p-2">
+                            No preview
+                          </div>
+                        )}
                     </motion.div>
                     <motion.div whileInView={{opacity: 1, x: 0}} initial={{opacity: 0, x: 100}} transition={{duration: 1}} className="w-full max-w-xl lg:w-3/4">
                         <h6 className="mb-2 font-semibold">{project.title}</h6>

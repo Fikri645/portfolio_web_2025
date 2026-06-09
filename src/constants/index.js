@@ -75,6 +75,55 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "ML Batch Fraud Scoring Pipeline - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "Production-grade fraud-detection batch pipeline built on Apache Airflow 2.9, dbt 1.8, LightGBM, and PostgreSQL 15 — all via Docker Compose. A 10-task DAG ingests 500 synthetic Indonesian transactions every 10 minutes (unique seed per run), transforms them via SQL window-function feature engineering in dbt, scores with a pre-trained LightGBM classifier (PR-AUC 0.9987), and monitors feature drift via PSI with Slack alerting. Demonstrates the complete post-training MLOps stack: orchestration, feature engineering as code, batch scoring, drift gating, and audit logging. Includes a live-stream data simulator, rolling retention policy, CI pipeline, and a GCP Cloud Run Job deployment pattern.",
+    technologies: ["Apache Airflow", "dbt", "LightGBM", "PostgreSQL", "Docker", "GitHub Actions"],
+    github: "https://github.com/Fikri645/ml-batch-pipeline",
+  },
+  {
+    title: "LLM Fine-Tuning — Indonesian Transaction Extraction - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "Fine-tuning three small open LLMs (Qwen2.5-3B, Gemma-4-E2B, Phi-3.5-mini) with QLoRA, DoRA, and LoRA (PEFT + TRL SFTTrainer) to extract structured JSON from Indonesian bank-SMS and e-wallet notifications — on a single RTX 3060 12 GB. Uses 2,000 synthetic training examples across 8 transaction types and 13 financial institutions. Best result: Gemma-4-E2B achieves 98.8% whole-record exact-match (up from 55.7% zero-shot, +43 pp). All PEFT methods reach 100% valid-JSON rate. Published fine-tuned adapter on HuggingFace Hub.",
+    technologies: ["PEFT", "TRL", "Qwen2.5-3B", "Gemma 4", "transformers", "bitsandbytes", "Gradio"],
+    github: "https://github.com/Fikri645/indo-transaction-extraction",
+    demo: "https://huggingface.co/spaces/fikri0o0/indo-transaction-extraction",
+  },
+  {
+    title: "Indonesian Financial Research Agent - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "A LangGraph multi-agent system for end-to-end IDX company research. A deterministic supervisor routes to parallel financial data fetching (yfinance, 10 ratios, sector-aware thresholds), a ReAct news agent, and hybrid RAG over uploaded annual-report PDFs (Docling + ChromaDB + BM25 + BGE reranker) — producing a structured risk assessment in Bahasa Indonesia. Parallel fetch cuts wall-clock time from ~12s to ~7s. An evaluation harness with 7 LLM-as-judge evaluators found and fixed a real Groq enum bug silently dropping bank tickers. 124 unit tests, CI green.",
+    technologies: ["LangGraph", "Groq", "Gemini", "ChromaDB", "Docling", "Pydantic v2", "Gradio"],
+    github: "https://github.com/Fikri645/indo-financial-agent",
+    demo: "https://huggingface.co/spaces/fikri0o0/indo-financial-agent",
+  },
+  {
+    title: "Real-Time Credit Card Fraud Detection - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "End-to-end fraud detection on 1.85M Sparkov transactions (~0.5% fraud, temporal split). Benchmarks three modelling paradigms: cost-sensitive LightGBM (PR-AUC 0.967, recall@top-1% = 98%), directed GraphSAGE GNN (card+merchant graph, 18.5M edges), and a legit-only autoencoder for label-free anomaly detection. A custom online feature store enables ~8ms P50 real-time scoring. Key finding: cost-sensitive weighting matches SMOTE at 2.2× less compute — but collapses on the real-world ULB dataset (PR-AUC 0.025 vs 0.418), proving imbalance strategy is dataset-dependent. 35 tests, CI green.",
+    technologies: ["LightGBM", "PyTorch Geometric", "SHAP", "Optuna", "MLflow", "FastAPI", "Docker", "Gradio"],
+    github: "https://github.com/Fikri645/fraud-detection",
+    demo: "https://huggingface.co/spaces/fikri0o0/fraud-detection",
+  },
+  {
+    title: "A/B Testing & Causal Inference Simulator - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "Four-method experimentation toolkit on the Hillstrom e-mail marketing dataset (64K customers, 3-arm RCT). Covers the full experiment lifecycle: power analysis (sample-size calculator, MDE formula, power curves), frequentist + Bayesian inference (Z-test, Beta-Binomial, P(B>A) = 100%), CUPED variance reduction, sequential testing with mSPRT (always-valid inference — demonstrates 14% vs 5% FPR under peeking), and uplift modelling (CausalForestDML, X-Learner, T-Learner via EconML). 53 unit tests, MLflow tracking, CI green.",
+    technologies: ["scipy", "EconML", "NumPy", "MLflow", "Gradio", "GitHub Actions"],
+    github: "https://github.com/Fikri645/ab-testing-causal",
+    demo: "https://huggingface.co/spaces/fikri0o0/ab-testing-causal",
+  },
+  {
     title: "Movie Recommendation System - 2026",
     type: ["machine-learning"],
     image: projectMovieRecsys,
