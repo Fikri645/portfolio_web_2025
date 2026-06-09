@@ -82,6 +82,7 @@ export const PROJECTS = [
       "Production-shaped credit default scoring on the Home Credit 2024 (Credit Risk Model Stability) dataset — 1.5M loan applications with a depth-based relational schema. Built on 2024-2026 SOTA methods rather than the textbook recipe: it optimizes the competition's Gini-stability metric (not just AUC), handles class imbalance with a PyTorch-autograd focal-loss LightGBM objective (no SMOTE), and ships the full responsible-AI layer — SHAP + DiCE counterfactual recourse (EU AI Act / GDPR Art. 22), a Fairlearn fairness audit, Platt-vs-isotonic probability calibration (ECE 0.0009), a business-cost optimal threshold (-53.9% cost), and a Cox PH survival model for lifetime-PD (IFRS 9 / Basel IRB). 4-model bake-off (CatBoost 0.694 > focal-LightGBM > weighted-LightGBM >> FT-Transformer) shows gradient boosting decisively beats tabular deep learning. Polars streaming feature engineering builds 734 features over 1.5M rows in 131s. FastAPI + Gradio serving, MLflow, Docker, GitHub Actions CI.",
     technologies: ["LightGBM", "CatBoost", "Polars", "SHAP", "DiCE", "Fairlearn", "lifelines", "FastAPI", "Docker"],
     github: "https://github.com/Fikri645/credit-scoring",
+    demo: "https://huggingface.co/spaces/fikri0o0/credit-scoring",
   },
   {
     title: "ML Batch Fraud Scoring Pipeline - 2026",
