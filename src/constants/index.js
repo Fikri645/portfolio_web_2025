@@ -14,20 +14,20 @@ import projectDemandForecasting from "../assets/projects/demand_forecasting.jpg"
 import projectChurnPrediction from "../assets/projects/churn_prediction.jpg";
 import projectPhilosopherChat from "../assets/projects/philosopher_chat.jpg";
 
-export const HERO_CONTENT = `I'm Muhammad Fikri Wahidin, a Machine Learning Engineer who ships models to production — not just notebooks. I built the NLU, NER, and text-to-speech systems behind Mona, the chatbot running in Telkom Indonesia's production environment, and published first-author IEEE research on computer vision. My portfolio spans 20+ end-to-end ML projects with live demos: LLM fine-tuning, RAG and multi-agent systems, credit scoring, fraud detection, and full MLOps pipelines.`;
+export const HERO_CONTENT = `I'm Muhammad Fikri Wahidin, a Machine Learning Engineer who ships models to production, not just notebooks. I built the NLU, NER, and text-to-speech systems behind Mona, the chatbot running in Telkom Indonesia's production environment, and published first-author IEEE research on computer vision. My portfolio spans 20+ end-to-end ML projects with live demos: LLM fine-tuning, RAG and multi-agent systems, credit scoring, fraud detection, and full MLOps pipelines.`;
 
-export const ABOUT_TEXT = `I started programming at SMK Telkom Banjarbaru in South Kalimantan, then earned my Informatics degree at Telkom University, Bandung — Summa Cumlaude, GPA 3.92, in 3.5 years. Along the way the web-development roots grew into a specialization: building machine learning systems that survive contact with production.
+export const ABOUT_TEXT = `I started programming at SMK Telkom Banjarbaru in South Kalimantan, then earned my Informatics degree at Telkom University, Bandung: Summa Cumlaude, GPA 3.92, in 3.5 years. Along the way the web-development roots grew into a specialization: building machine learning systems that survive contact with production.
 
-Most recently I was a Data Scientist Intern at Netmonk (Telkom Indonesia's Digital Product Division), where I engineered the AI behind the Mona chatbot: an NLU pipeline iterated through three model generations up to a fine-tuned embedding model, a custom NER system integrated across four service layers, and a TTS voice engine with a caching architecture that eliminated real-time inference latency. My undergraduate thesis — comparing four YOLO generations for brain-tumor detection in MRI scans — was published as a first-author paper at IEEE ICADEIS 2025 and has been cited by other researchers.
+Most recently I was a Data Scientist Intern at Netmonk (Telkom Indonesia's Digital Product Division), where I engineered the AI behind the Mona chatbot: an NLU pipeline iterated through three model generations up to a fine-tuned embedding model, a custom NER system integrated across four service layers, and a TTS voice engine with a caching architecture that eliminated real-time inference latency. My undergraduate thesis, which compared four YOLO generations for brain-tumor detection in MRI scans, was published as a first-author paper at IEEE ICADEIS 2025 and has been cited by other researchers.
 
-What defines my work is evidence-first engineering: pre-registered benchmarks, measured ablations, unit tests, and CI on every project. That mindset runs through my portfolio — from QLoRA fine-tuning of LLMs for Indonesian text and LangGraph multi-agent research systems, to credit scoring with a full responsible-AI layer and real-time fraud detection. I'm especially interested in Indonesian NLP, where the language I grew up with meets the problems I want to solve. If you're working on something in that space, let's talk.`;
+What defines my work is evidence-first engineering: pre-registered benchmarks, measured ablations, unit tests, and CI on every project. That mindset runs through my portfolio, from QLoRA fine-tuning of LLMs for Indonesian text and LangGraph multi-agent research systems, to credit scoring with a full responsible-AI layer and real-time fraud detection. I'm especially interested in Indonesian NLP, where the language I grew up with meets the problems I want to solve. If you're working on something in that space, let's talk.`;
 
 export const EXPERIENCES = [
   {
     year: "November 2025 - May 2026",
     role: "Data Scientist Intern",
-    company: "Netmonk (Telkom Indonesia — DDP)",
-    description: `Developed and deployed the AI core of Mona, Netmonk's network-monitoring chatbot running in Telkom Indonesia's production environment. Engineered the NLU (Natural Language Understanding) intent-classification pipeline through three model generations — TF-IDF + SVM, fastembed + ONNX embeddings, and a fine-tuned IBM Granite multilingual embedding model — using LLM-based data augmentation (Gemini Flash, Gemma) to curate ~2,000 high-quality training samples from 5,000 raw. Built an end-to-end NER (Named Entity Recognition) pipeline in two generations, from rule-based matching to a custom SpaCy model trained on domain data, integrated across all four service layers. Engineered a TTS (Text-to-Speech) voice engine by fine-tuning a Piper ONNX model and designing a pre-generation + MinIO caching architecture that eliminated real-time inference latency. Shipped chatbot flows to Telegram and web-widget channels, managing the full dev, staging, and production deployment cycle.`,
+    company: "Netmonk (Telkom Indonesia, Digital Product Division)",
+    description: `Developed and deployed the AI core of Mona, Netmonk's network-monitoring chatbot running in Telkom Indonesia's production environment. Engineered the NLU (Natural Language Understanding) intent-classification pipeline through three model generations (TF-IDF + SVM, fastembed + ONNX embeddings, and a fine-tuned IBM Granite multilingual embedding model), using LLM-based data augmentation (Gemini Flash, Gemma) to curate ~2,000 high-quality training samples from 5,000 raw. Built an end-to-end NER (Named Entity Recognition) pipeline in two generations, from rule-based matching to a custom SpaCy model trained on domain data, integrated across all four service layers. Engineered a TTS (Text-to-Speech) voice engine by fine-tuning a Piper ONNX model and designing a pre-generation + MinIO caching architecture that eliminated real-time inference latency. Shipped chatbot flows to Telegram and web-widget channels, managing the full dev, staging, and production deployment cycle.`,
     technologies: ["Python", "SpaCy", "ONNX", "FastAPI", "Sentence Transformers", "LLM", "PostgreSQL", "MongoDB"],
   },
   {
@@ -78,7 +78,7 @@ export const PROJECTS = [
     type: ["machine-learning"],
     image: null,
     description:
-      "A pre-registered benchmark study answering: is the 5-year-old IndoBERT still the right model for Indonesian NLP in 2026? Six arms — TF-IDF floor, IndoBERT-base/large (2020), mmBERT-base (2025 multilingual ModernBERT), SahabatAI-v1 9B with QLoRA+DoRA (4-bit), and zero-/few-shot prompting — across SmSA sentiment, NusaX regional languages (Javanese, Sundanese, Minangkabau), and HoASA aspect-based sentiment. 75 runs, 3 seeds per encoder, hypotheses written before training. Verdicts: the 2025 multilingual mmBERT beats IndoBERT-base even on formal Indonesian (H1 falsified, 0.915 vs 0.889); the QLoRA 9B tops every encoder (0.940) but is GPU-only; LoRA/DoRA at 1.1% trainable params beat full fine-tuning (0.929 vs 0.915); and 5-shot prompting matches a full encoder fine-tune with zero training. Includes honest engineering notes: Windows sysmem-fallback trap on 12GB VRAM, pyarrow-before-torch DLL ordering, constrained label decoding. Live side-by-side demo with real latency on HF Spaces.",
+      "A pre-registered benchmark study answering: is the 5-year-old IndoBERT still the right model for Indonesian NLP in 2026? Six arms (TF-IDF floor, IndoBERT-base/large from 2020, mmBERT-base from 2025, SahabatAI-v1 9B with QLoRA+DoRA 4-bit, and zero-/few-shot prompting) across SmSA sentiment, NusaX regional languages (Javanese, Sundanese, Minangkabau), and HoASA aspect-based sentiment. 75 runs, 3 seeds per encoder, hypotheses written before training. Verdicts: the 2025 multilingual mmBERT beats IndoBERT-base even on formal Indonesian (H1 falsified, 0.915 vs 0.889); the QLoRA 9B tops every encoder (0.940) but is GPU-only; LoRA/DoRA at 1.1% trainable params beat full fine-tuning (0.929 vs 0.915); and 5-shot prompting matches a full encoder fine-tune with zero training. Includes honest engineering notes: Windows sysmem-fallback trap on 12GB VRAM, pyarrow-before-torch DLL ordering, constrained label decoding. Live side-by-side demo with real latency on HF Spaces.",
     technologies: ["transformers", "PEFT", "LoRA/DoRA", "QLoRA", "mmBERT", "IndoBERT", "SahabatAI", "MLflow", "Gradio"],
     github: "https://github.com/Fikri645/indo-nlp-finetuning",
     demo: "https://huggingface.co/spaces/fikri0o0/indo-sentiment-bakeoff",
@@ -88,7 +88,7 @@ export const PROJECTS = [
     type: ["machine-learning"],
     image: null,
     description:
-      "Production-shaped credit default scoring on the Home Credit 2024 (Credit Risk Model Stability) dataset — 1.5M loan applications with a depth-based relational schema. Built on 2024-2026 SOTA methods rather than the textbook recipe: it optimizes the competition's Gini-stability metric (not just AUC), handles class imbalance with a PyTorch-autograd focal-loss LightGBM objective (no SMOTE), and ships the full responsible-AI layer — SHAP + DiCE counterfactual recourse (EU AI Act / GDPR Art. 22), a Fairlearn fairness audit, Platt-vs-isotonic probability calibration (ECE 0.0009), a business-cost optimal threshold (-53.9% cost), and a Cox PH survival model for lifetime-PD (IFRS 9 / Basel IRB). 4-model bake-off (CatBoost 0.694 > focal-LightGBM > weighted-LightGBM >> FT-Transformer) shows gradient boosting decisively beats tabular deep learning. Polars streaming feature engineering builds 734 features over 1.5M rows in 131s. FastAPI + Gradio serving, MLflow, Docker, GitHub Actions CI.",
+      "Production-shaped credit default scoring on the Home Credit 2024 (Credit Risk Model Stability) dataset: 1.5M loan applications with a depth-based relational schema. Built on 2024-2026 SOTA methods rather than the textbook recipe: it optimizes the competition's Gini-stability metric (not just AUC), handles class imbalance with a PyTorch-autograd focal-loss LightGBM objective (no SMOTE), and ships the full responsible-AI layer: SHAP + DiCE counterfactual recourse (EU AI Act / GDPR Art. 22), a Fairlearn fairness audit, Platt-vs-isotonic probability calibration (ECE 0.0009), a business-cost optimal threshold (-53.9% cost), and a Cox PH survival model for lifetime-PD (IFRS 9 / Basel IRB). 4-model bake-off (CatBoost 0.694 > focal-LightGBM > weighted-LightGBM >> FT-Transformer) shows gradient boosting decisively beats tabular deep learning. Polars streaming feature engineering builds 734 features over 1.5M rows in 131s. FastAPI + Gradio serving, MLflow, Docker, GitHub Actions CI.",
     technologies: ["LightGBM", "CatBoost", "Polars", "SHAP", "DiCE", "Fairlearn", "lifelines", "FastAPI", "Docker"],
     github: "https://github.com/Fikri645/credit-scoring",
     demo: "https://huggingface.co/spaces/fikri0o0/credit-scoring",
@@ -98,16 +98,16 @@ export const PROJECTS = [
     type: ["machine-learning"],
     image: null,
     description:
-      "Production-grade fraud-detection batch pipeline built on Apache Airflow 2.9, dbt 1.8, LightGBM, and PostgreSQL 15 — all via Docker Compose. A 10-task DAG ingests 500 synthetic Indonesian transactions every 10 minutes (unique seed per run), transforms them via SQL window-function feature engineering in dbt, scores with a pre-trained LightGBM classifier (PR-AUC 0.9987), and monitors feature drift via PSI with Slack alerting. Demonstrates the complete post-training MLOps stack: orchestration, feature engineering as code, batch scoring, drift gating, and audit logging. Includes a live-stream data simulator, rolling retention policy, CI pipeline, and a GCP Cloud Run Job deployment pattern.",
+      "Production-grade fraud-detection batch pipeline built on Apache Airflow 2.9, dbt 1.8, LightGBM, and PostgreSQL 15, all via Docker Compose. A 10-task DAG ingests 500 synthetic Indonesian transactions every 10 minutes (unique seed per run), transforms them via SQL window-function feature engineering in dbt, scores with a pre-trained LightGBM classifier (PR-AUC 0.9987), and monitors feature drift via PSI with Slack alerting. Demonstrates the complete post-training MLOps stack: orchestration, feature engineering as code, batch scoring, drift gating, and audit logging. Includes a live-stream data simulator, rolling retention policy, CI pipeline, and a GCP Cloud Run Job deployment pattern.",
     technologies: ["Apache Airflow", "dbt", "LightGBM", "PostgreSQL", "Docker", "GitHub Actions"],
     github: "https://github.com/Fikri645/ml-batch-pipeline",
   },
   {
-    title: "LLM Fine-Tuning — Indonesian Transaction Extraction - 2026",
+    title: "LLM Fine-Tuning for Indonesian Transaction Extraction - 2026",
     type: ["machine-learning"],
     image: null,
     description:
-      "Fine-tuning three small open LLMs (Qwen2.5-3B, Gemma-4-E2B, Phi-3.5-mini) with QLoRA, DoRA, and LoRA (PEFT + TRL SFTTrainer) to extract structured JSON from Indonesian bank-SMS and e-wallet notifications — on a single RTX 3060 12 GB. Uses 2,000 synthetic training examples across 8 transaction types and 13 financial institutions. Best result: Gemma-4-E2B achieves 98.8% whole-record exact-match (up from 55.7% zero-shot, +43 pp). All PEFT methods reach 100% valid-JSON rate. Published fine-tuned adapter on HuggingFace Hub.",
+      "Fine-tuning three small open LLMs (Qwen2.5-3B, Gemma-4-E2B, Phi-3.5-mini) with QLoRA, DoRA, and LoRA (PEFT + TRL SFTTrainer) to extract structured JSON from Indonesian bank-SMS and e-wallet notifications, all on a single RTX 3060 12 GB. Uses 2,000 synthetic training examples across 8 transaction types and 13 financial institutions. Best result: Gemma-4-E2B achieves 98.8% whole-record exact-match (up from 55.7% zero-shot, +43 pp). All PEFT methods reach 100% valid-JSON rate. Published fine-tuned adapter on HuggingFace Hub.",
     technologies: ["PEFT", "TRL", "Qwen2.5-3B", "Gemma 4", "transformers", "bitsandbytes", "Gradio"],
     github: "https://github.com/Fikri645/indo-transaction-extraction",
     demo: "https://huggingface.co/spaces/fikri0o0/indo-transaction-extraction",
@@ -117,7 +117,7 @@ export const PROJECTS = [
     type: ["machine-learning"],
     image: null,
     description:
-      "A LangGraph multi-agent system for end-to-end IDX company research. A deterministic supervisor routes to parallel financial data fetching (yfinance, 10 ratios, sector-aware thresholds), a ReAct news agent, and hybrid RAG over uploaded annual-report PDFs (Docling + ChromaDB + BM25 + BGE reranker) — producing a structured risk assessment in Bahasa Indonesia. Parallel fetch cuts wall-clock time from ~12s to ~7s. An evaluation harness with 7 LLM-as-judge evaluators found and fixed a real Groq enum bug silently dropping bank tickers. 124 unit tests, CI green.",
+      "A LangGraph multi-agent system for end-to-end IDX company research. A deterministic supervisor routes to parallel financial data fetching (yfinance, 10 ratios, sector-aware thresholds), a ReAct news agent, and hybrid RAG over uploaded annual-report PDFs (Docling + ChromaDB + BM25 + BGE reranker), producing a structured risk assessment in Bahasa Indonesia. Parallel fetch cuts wall-clock time from ~12s to ~7s. An evaluation harness with 7 LLM-as-judge evaluators found and fixed a real Groq enum bug silently dropping bank tickers. 124 unit tests, CI green.",
     technologies: ["LangGraph", "Groq", "Gemini", "ChromaDB", "Docling", "Pydantic v2", "Gradio"],
     github: "https://github.com/Fikri645/indo-financial-agent",
     demo: "https://huggingface.co/spaces/fikri0o0/indo-financial-agent",
@@ -127,7 +127,7 @@ export const PROJECTS = [
     type: ["machine-learning"],
     image: null,
     description:
-      "End-to-end fraud detection on 1.85M Sparkov transactions (~0.5% fraud, temporal split). Benchmarks three modelling paradigms: cost-sensitive LightGBM (PR-AUC 0.967, recall@top-1% = 98%), directed GraphSAGE GNN (card+merchant graph, 18.5M edges), and a legit-only autoencoder for label-free anomaly detection. A custom online feature store enables ~8ms P50 real-time scoring. Key finding: cost-sensitive weighting matches SMOTE at 2.2× less compute — but collapses on the real-world ULB dataset (PR-AUC 0.025 vs 0.418), proving imbalance strategy is dataset-dependent. 35 tests, CI green.",
+      "End-to-end fraud detection on 1.85M Sparkov transactions (~0.5% fraud, temporal split). Benchmarks three modelling paradigms: cost-sensitive LightGBM (PR-AUC 0.967, recall@top-1% = 98%), directed GraphSAGE GNN (card+merchant graph, 18.5M edges), and a legit-only autoencoder for label-free anomaly detection. A custom online feature store enables ~8ms P50 real-time scoring. Key finding: cost-sensitive weighting matches SMOTE at 2.2x less compute, but collapses on the real-world ULB dataset (PR-AUC 0.025 vs 0.418), proving imbalance strategy is dataset-dependent. 35 tests, CI green.",
     technologies: ["LightGBM", "PyTorch Geometric", "SHAP", "Optuna", "MLflow", "FastAPI", "Docker", "Gradio"],
     github: "https://github.com/Fikri645/fraud-detection",
     demo: "https://huggingface.co/spaces/fikri0o0/fraud-detection",
@@ -137,7 +137,7 @@ export const PROJECTS = [
     type: ["machine-learning"],
     image: null,
     description:
-      "Four-method experimentation toolkit on the Hillstrom e-mail marketing dataset (64K customers, 3-arm RCT). Covers the full experiment lifecycle: power analysis (sample-size calculator, MDE formula, power curves), frequentist + Bayesian inference (Z-test, Beta-Binomial, P(B>A) = 100%), CUPED variance reduction, sequential testing with mSPRT (always-valid inference — demonstrates 14% vs 5% FPR under peeking), and uplift modelling (CausalForestDML, X-Learner, T-Learner via EconML). 53 unit tests, MLflow tracking, CI green.",
+      "Four-method experimentation toolkit on the Hillstrom e-mail marketing dataset (64K customers, 3-arm RCT). Covers the full experiment lifecycle: power analysis (sample-size calculator, MDE formula, power curves), frequentist + Bayesian inference (Z-test, Beta-Binomial, P(B>A) = 100%), CUPED variance reduction, sequential testing with mSPRT (always-valid inference, demonstrating 14% vs 5% FPR under peeking), and uplift modelling (CausalForestDML, X-Learner, T-Learner via EconML). 53 unit tests, MLflow tracking, CI green.",
     technologies: ["scipy", "EconML", "NumPy", "MLflow", "Gradio", "GitHub Actions"],
     github: "https://github.com/Fikri645/ab-testing-causal",
     demo: "https://huggingface.co/spaces/fikri0o0/ab-testing-causal",
@@ -199,11 +199,11 @@ export const PROJECTS = [
     technologies: ["Python", "BERT", "Flask", "Laravel", "MySQL"],
   },
   {
-    title: "Brain Tumor Detection Using YOLO Models in MRI Images — IEEE ICADEIS 2025",
+    title: "Brain Tumor Detection Using YOLO Models in MRI Images (IEEE ICADEIS 2025)",
     type: ["machine-learning"],
     image: project3,
     description:
-      "My undergraduate thesis, published as a first-author paper at the 2025 International Conference on Advancement in Data Science, E-learning and Information System (ICADEIS, IEEE) — cited 5 times as of mid-2026. The study benchmarks four modern YOLO generations (YOLO11m, YOLOv10m, YOLOv9m, YOLOv8m) for detecting glioma, meningioma, and pituitary tumors across 3,064 T1-weighted contrast-enhanced MRI slices from 233 patients. Hyperparameters were tuned with Bayesian Optimization + HyperBand (BOHB) via Ray Tune over 16 trials. YOLO11m delivered the best accuracy-speed balance (mAP50 0.934 at 70.5 FPS), while YOLOv8m was the fastest (80.5 FPS). Failure analysis identified low-contrast regions and complex anatomy as the remaining challenges. DOI: 10.1109/ICADEIS65852.2025.10933433.",
+      "My undergraduate thesis, published as a first-author paper at the 2025 International Conference on Advancement in Data Science, E-learning and Information System (ICADEIS, IEEE), cited 5 times as of mid-2026. The study benchmarks four modern YOLO generations (YOLO11m, YOLOv10m, YOLOv9m, YOLOv8m) for detecting glioma, meningioma, and pituitary tumors across 3,064 T1-weighted contrast-enhanced MRI slices from 233 patients. Hyperparameters were tuned with Bayesian Optimization + HyperBand (BOHB) via Ray Tune over 16 trials. YOLO11m delivered the best accuracy-speed balance (mAP50 0.934 at 70.5 FPS), while YOLOv8m was the fastest (80.5 FPS). Failure analysis identified low-contrast regions and complex anatomy as the remaining challenges. DOI: 10.1109/ICADEIS65852.2025.10933433.",
     technologies: ["Python", "YOLO11", "YOLOv8-v10", "Ray Tune", "BOHB", "Computer Vision"],
     paper: "https://ieeexplore.ieee.org/document/10933433",
   },
