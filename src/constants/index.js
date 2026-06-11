@@ -74,6 +74,15 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "Real-Time Streaming Fraud Detection - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "The same fraud model, three deployment patterns: my batch fraud-detection LightGBM (PR-AUC 0.9666) made to score a live transaction stream. Redpanda (Kafka-compatible) topics, Quix Streams stateful per-card features (1h/24h/7d event-time sliding windows, idempotent by txn_id, out-of-order tolerant), Redis online feature store, micro-batched vectorized scoring, FastAPI + SSE live dashboard. Pre-registered targets all measured and PASSED: end-to-end p99 latency 172ms at 100 TPS (naive baseline was 12.9s — fixed via micro-batching + librdkafka fetch-wait tuning), byte-identical topic replays (875/875 cards, after fixing an at-least-once double-count bug), and 1,500/1,500 scores still flowing with Redis down for 15s. Four documented engineering war stories: the poison pill, the throughput ceiling, the silently-expensive 500ms default, and replay divergence. Closes the streaming/Kafka gap identified in a 3-site Indonesian job-market scan.",
+    technologies: ["Kafka/Redpanda", "Quix Streams", "Redis", "LightGBM", "FastAPI", "SSE", "Docker Compose", "GitHub Actions"],
+    github: "https://github.com/Fikri645/streaming-fraud-detection",
+  },
+  {
     title: "Indonesian NLP Fine-Tuning Bake-Off - 2026",
     type: ["machine-learning"],
     image: null,
