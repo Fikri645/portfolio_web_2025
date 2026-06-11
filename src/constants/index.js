@@ -27,14 +27,14 @@ export const EXPERIENCES = [
     year: "November 2025 - May 2026",
     role: "Data Scientist Intern",
     company: "Netmonk (Telkom Indonesia — DDP)",
-    description: `Developed and deployed core AI modules for Mona, Netmonk's network-monitoring chatbot used in Telkom Indonesia's production environment. Rebuilt the NLU (Natural Language Understanding) pipeline from a TF-IDF/SVM baseline to a sentence-embedding + KNN classifier, improving intent classification accuracy by over 20% on ambiguous queries. Built a Named Entity Recognition (NER) module using SpaCy to extract network entities (IP addresses, device names, metric types) from free-text user inputs. Engineered a production TTS (Text-to-Speech) service using ONNX-optimized models, reducing inference latency by 60% compared to the previous REST-based approach. Applied LLM-based data augmentation to expand the training dataset for low-resource intents, resulting in more robust model performance across edge cases.`,
+    description: `Developed and deployed the AI core of Mona, Netmonk's network-monitoring chatbot running in Telkom Indonesia's production environment. Engineered the NLU (Natural Language Understanding) intent-classification pipeline through three model generations — TF-IDF + SVM, fastembed + ONNX embeddings, and a fine-tuned IBM Granite multilingual embedding model — using LLM-based data augmentation (Gemini Flash, Gemma) to curate ~2,000 high-quality training samples from 5,000 raw. Built an end-to-end NER (Named Entity Recognition) pipeline in two generations, from rule-based matching to a custom SpaCy model trained on domain data, integrated across all four service layers. Engineered a TTS (Text-to-Speech) voice engine by fine-tuning a Piper ONNX model and designing a pre-generation + MinIO caching architecture that eliminated real-time inference latency. Shipped chatbot flows to Telegram and web-widget channels, managing the full dev, staging, and production deployment cycle.`,
     technologies: ["Python", "SpaCy", "ONNX", "FastAPI", "Sentence Transformers", "LLM", "PostgreSQL", "MongoDB"],
   },
   {
     year: "September 2024 - November 2024",
     role: "Data Analyst Intern",
     company: "Telkom Indonesia",
-    description: `Designed and implemented an ELK Stack-based security monitoring system within the Network Function Virtualization division to detect suspicious multi-device login activities across Telkom's infrastructure. Leveraged Elasticsearch for efficient log indexing and Kibana for comprehensive visualization, developing custom anomaly detection rules that identified high-risk IP addresses for proactive threat mitigation. Integrated Telegram API to deliver real-time alerts for critical security events, including simultaneous logins from 4+ devices within a one-minute window. Created interactive Kibana dashboards highlighting the top 10 users with abnormal login patterns, enabling faster decision-making for cybersecurity operations.`,
+    description: `Designed and implemented an ELK Stack-based security monitoring system within the Information Technology division to detect suspicious multi-device login activities across Telkom's infrastructure. Leveraged Elasticsearch for efficient log indexing and Kibana for comprehensive visualization, developing custom anomaly detection rules that identified high-risk IP addresses for proactive threat mitigation. Integrated Telegram API to deliver real-time alerts for critical security events, including simultaneous logins from 4+ devices within a one-minute window. Created interactive Kibana dashboards highlighting the top 10 users with abnormal login patterns, enabling faster decision-making for cybersecurity operations.`,
     technologies: ["Elasticsearch", "Kibana", "Logstash", "Telegram API"],
   },
   {
@@ -53,7 +53,7 @@ export const EXPERIENCES = [
     year: "September 2021 - March 2025",
     role: "Informatics Student",
     company: "Telkom University",
-    description: `Pursued undergraduate education in Informatics at Telkom University, building upon my high school specialization. Developed comprehensive expertise in Programming, Computing Systems, and Computer Logic Processes. Applied theoretical knowledge through practical projects, gaining proficiency in multiple programming languages and frameworks while developing strong analytical and problem-solving skills essential for software development and systems engineering. Earned my degree within 3.5 years (7 semesters) with OPES Scholarship, graduating with Summa Cum Laude honors.`,
+    description: `Pursued undergraduate education in Informatics at Telkom University, building upon my high school specialization. Developed comprehensive expertise in Programming, Computing Systems, and Computer Logic Processes. Applied theoretical knowledge through practical projects, gaining proficiency in multiple programming languages and frameworks while developing strong analytical and problem-solving skills essential for software development and systems engineering. Earned my degree within 3.5 years (7 semesters) with OPES Scholarship, graduating Summa Cum Laude with a GPA of 3.92/4.00. My undergraduate thesis on brain-tumor detection with YOLO models was published as a first-author paper at IEEE ICADEIS 2025.`,
     technologies: ["Python", "R", "GoLang", "C++", "C", "Java", "Laravel", "MySQL", "Cyber Security"],
   },
   {
@@ -199,12 +199,22 @@ export const PROJECTS = [
     technologies: ["Python", "BERT", "Flask", "Laravel", "MySQL"],
   },
   {
-    title: "Brain Tumor Detection YOLO Model - 2024",
+    title: "Brain Tumor Detection Using YOLO Models in MRI Images — IEEE ICADEIS 2025",
     type: ["machine-learning"],
     image: project3,
     description:
-      "This medical imaging project implements a customized YOLO (You Only Look Once) object detection model to identify and localize brain tumors in MRI scans. I optimized the model's hyperparameters using Ray Tune, implementing distributed hyperparameter tuning to systematically explore the parameter space and maximize detection accuracy. The system was trained on annotated medical imaging datasets with particular attention to balancing precision and recall to minimize false negatives in this critical diagnostic application.",
-    technologies: ["Python", "YOLO", "Ray Tune"],
+      "My undergraduate thesis, published as a first-author paper at the 2025 International Conference on Advancement in Data Science, E-learning and Information System (ICADEIS, IEEE) — cited 5 times as of mid-2026. The study benchmarks four modern YOLO generations (YOLO11m, YOLOv10m, YOLOv9m, YOLOv8m) for detecting glioma, meningioma, and pituitary tumors across 3,064 T1-weighted contrast-enhanced MRI slices from 233 patients. Hyperparameters were tuned with Bayesian Optimization + HyperBand (BOHB) via Ray Tune over 16 trials. YOLO11m delivered the best accuracy-speed balance (mAP50 0.934 at 70.5 FPS), while YOLOv8m was the fastest (80.5 FPS). Failure analysis identified low-contrast regions and complex anatomy as the remaining challenges. DOI: 10.1109/ICADEIS65852.2025.10933433.",
+    technologies: ["Python", "YOLO11", "YOLOv8-v10", "Ray Tune", "BOHB", "Computer Vision"],
+    paper: "https://ieeexplore.ieee.org/document/10933433",
+  },
+  {
+    title: "Biznet Twitter Sentiment Analysis - 2025",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "Indonesian-language sentiment analysis of Twitter/X posts about Biznet, one of Indonesia's largest ISPs. Fine-tuned IndoRoBERTa to classify customer-feedback sentiment, with an Indonesian NLP preprocessing pipeline handling slang normalization and noisy social-media text. An early entry in my Indonesian-NLP line of work that continues through the NLP Fine-Tuning Bake-Off and transaction-extraction projects.",
+    technologies: ["Python", "IndoRoBERTa", "Transformers", "Pandas"],
+    github: "https://github.com/Fikri645/biznet-sentiment-analysis",
   },
   {
     title: "Portfolio Website (This Website) - 2025",

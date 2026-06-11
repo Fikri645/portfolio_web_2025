@@ -1,5 +1,5 @@
 import { FaPython, FaLaravel, FaDatabase, FaCode } from "react-icons/fa"
-import { SiTailwindcss, SiTensorflow, SiScikitlearn, SiElasticsearch, SiBootstrap, SiMysql } from "react-icons/si"
+import { SiTailwindcss, SiTensorflow, SiScikitlearn, SiElasticsearch, SiBootstrap, SiMysql, SiPytorch, SiHuggingface, SiLangchain, SiFastapi, SiPostgresql, SiMlflow, SiDocker } from "react-icons/si"
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import WaterSimulation from './WaterSimulation';
@@ -92,30 +92,45 @@ const Technologies = () => {
                     <SiScikitlearn className="text-7xl text-orange-600" />
                     <span className="text-sm mt-2">Scikit-learn</span>
                 </motion.div>
+                {/* PyTorch */}
+                <motion.div variants={iconVariants(4)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
+                    <SiPytorch className="text-7xl text-orange-600" />
+                    <span className="text-sm mt-2">PyTorch</span>
+                </motion.div>
+                {/* Hugging Face */}
+                <motion.div variants={iconVariants(2)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
+                    <SiHuggingface className="text-7xl text-yellow-400" />
+                    <span className="text-sm mt-2">Hugging Face</span>
+                </motion.div>
+                {/* LangChain */}
+                <motion.div variants={iconVariants(3.5)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
+                    <SiLangchain className="text-7xl text-emerald-400" />
+                    <span className="text-sm mt-2">LangChain</span>
+                </motion.div>
+                {/* FastAPI */}
+                <motion.div variants={iconVariants(6)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
+                    <SiFastapi className="text-7xl text-teal-400" />
+                    <span className="text-sm mt-2">FastAPI</span>
+                </motion.div>
+                {/* Docker */}
+                <motion.div variants={iconVariants(4.5)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
+                    <SiDocker className="text-7xl text-blue-500" />
+                    <span className="text-sm mt-2">Docker</span>
+                </motion.div>
+                {/* MLflow */}
+                <motion.div variants={iconVariants(2.8)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
+                    <SiMlflow className="text-7xl text-sky-400" />
+                    <span className="text-sm mt-2">MLflow</span>
+                </motion.div>
+                {/* PostgreSQL */}
+                <motion.div variants={iconVariants(5.5)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
+                    <SiPostgresql className="text-7xl text-blue-400" />
+                    <span className="text-sm mt-2">PostgreSQL</span>
+                </motion.div>
                 {/* Elasticsearch */}
                 <motion.div variants={iconVariants(2)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
                     <SiElasticsearch className="text-7xl text-green-500" />
                     <span className="text-sm mt-2">Elasticsearch</span>
-                </motion.div>
-                {/* MySQL */}
-                <motion.div variants={iconVariants(6)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
-                    <SiMysql className="text-7xl text-blue-400" />
-                    <span className="text-sm mt-2">MySQL</span>
-                </motion.div>
-                {/* Laravel */}
-                <motion.div variants={iconVariants(4)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
-                    <FaLaravel className="text-7xl text-red-500" />
-                    <span className="text-sm mt-2">Laravel</span>
-                </motion.div>
-                {/* Tailwind */}
-                <motion.div variants={iconVariants(3)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
-                    <SiTailwindcss className="text-7xl text-cyan-400" />
-                    <span className="text-sm mt-2">Tailwind</span>
-                </motion.div>
-                {/* Bootstrap */}
-                <motion.div variants={iconVariants(3.5)} initial="initial" animate="animate" className="rounded-2xl border-4 border-neutral-800 p-4 flex flex-col items-center">
-                    <SiBootstrap className="text-7xl text-purple-500" />
-                    <span className="text-sm mt-2">Bootstrap</span>
                 </motion.div>
             </motion.div>
         </div>
