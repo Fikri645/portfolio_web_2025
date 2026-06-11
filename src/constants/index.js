@@ -75,6 +75,16 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "Indonesian NLP Fine-Tuning Bake-Off - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "A pre-registered benchmark study answering: is the 5-year-old IndoBERT still the right model for Indonesian NLP in 2026? Six arms — TF-IDF floor, IndoBERT-base/large (2020), mmBERT-base (2025 multilingual ModernBERT), SahabatAI-v1 9B with QLoRA+DoRA (4-bit), and zero-/few-shot prompting — across SmSA sentiment, NusaX regional languages (Javanese, Sundanese, Minangkabau), and HoASA aspect-based sentiment. 75 runs, 3 seeds per encoder, hypotheses written before training. Verdicts: the 2025 multilingual mmBERT beats IndoBERT-base even on formal Indonesian (H1 falsified, 0.915 vs 0.889); the QLoRA 9B tops every encoder (0.940) but is GPU-only; LoRA/DoRA at 1.1% trainable params beat full fine-tuning (0.929 vs 0.915); and 5-shot prompting matches a full encoder fine-tune with zero training. Includes honest engineering notes: Windows sysmem-fallback trap on 12GB VRAM, pyarrow-before-torch DLL ordering, constrained label decoding. Live side-by-side demo with real latency on HF Spaces.",
+    technologies: ["transformers", "PEFT", "LoRA/DoRA", "QLoRA", "mmBERT", "IndoBERT", "SahabatAI", "MLflow", "Gradio"],
+    github: "https://github.com/Fikri645/indo-nlp-finetuning",
+    demo: "https://huggingface.co/spaces/fikri0o0/indo-sentiment-bakeoff",
+  },
+  {
     title: "Credit Default Scoring - 2026",
     type: ["machine-learning"],
     image: null,
