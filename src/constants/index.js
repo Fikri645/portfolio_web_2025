@@ -14,13 +14,13 @@ import projectDemandForecasting from "../assets/projects/demand_forecasting.jpg"
 import projectChurnPrediction from "../assets/projects/churn_prediction.jpg";
 import projectPhilosopherChat from "../assets/projects/philosopher_chat.jpg";
 
-export const HERO_CONTENT = `Hello, I am Muhammad Fikri Wahidin, a graduate of Informatics focusing in software engineering and machine learning. With an educational background at SMK Telkom Banjarbaru and Telkom University, I have a strong foundation in programming, especially machine learning, data analysis, and web development. Let's collaborate to build a more inclusive and impactful technological future.`;
+export const HERO_CONTENT = `I'm Muhammad Fikri Wahidin, a Machine Learning Engineer who ships models to production — not just notebooks. I built the NLU, NER, and text-to-speech systems behind Mona, the chatbot running in Telkom Indonesia's production environment, and published first-author IEEE research on computer vision. My portfolio spans 20+ end-to-end ML projects with live demos: LLM fine-tuning, RAG and multi-agent systems, credit scoring, fraud detection, and full MLOps pipelines.`;
 
-export const ABOUT_TEXT = `I come from Banjar Regency, South Kalimantan, and have been on a long journey in the world of technology. My passion for programming began when I attended SMK Telkom Banjarbaru with a Software Engineering expertise. There, I learned the basics of algorithms and software development, which became the foundation for my decision to continue my studies in the Informatics Study Program, Telkom University.
+export const ABOUT_TEXT = `I started programming at SMK Telkom Banjarbaru in South Kalimantan, then earned my Informatics degree at Telkom University, Bandung — Summa Cumlaude, GPA 3.92, in 3.5 years. Along the way the web-development roots grew into a specialization: building machine learning systems that survive contact with production.
 
-During my studies, I studied areas such as machine learning (building predictive models for real-world data), data analysis with Python and SQL, and cybersecurity principles in designing systems. I believe that technology should be a tool to solve real problems, and that is why I focus on developing code-based solutions that can be adapted across sectors, from fintech to public services.
+Most recently I was a Data Scientist Intern at Netmonk (Telkom Indonesia's Digital Product Division), where I engineered the AI behind the Mona chatbot: an NLU pipeline iterated through three model generations up to a fine-tuned embedding model, a custom NER system integrated across four service layers, and a TTS voice engine with a caching architecture that eliminated real-time inference latency. My undergraduate thesis — comparing four YOLO generations for brain-tumor detection in MRI scans — was published as a first-author paper at IEEE ICADEIS 2025 and has been cited by other researchers.
 
-My vision is to contribute to the advancement of Indonesian technology by encouraging sustainable innovation, accessibility for all, and security in the digital era. Let's connect and explore opportunities to create impact together through technology.`;
+What defines my work is evidence-first engineering: pre-registered benchmarks, measured ablations, unit tests, and CI on every project. That mindset runs through my portfolio — from QLoRA fine-tuning of LLMs for Indonesian text and LangGraph multi-agent research systems, to credit scoring with a full responsible-AI layer and real-time fraud detection. I'm especially interested in Indonesian NLP, where the language I grew up with meets the problems I want to solve. If you're working on something in that space, let's talk.`;
 
 export const EXPERIENCES = [
   {
@@ -67,7 +67,6 @@ export const EXPERIENCES = [
     year: "July 2018 - July 2021",
     role: "Software Engineering Student",
     company: "SMK Telkom Banjarbaru",
-    description: `I studied at SMK Telkom Banjarbaru with Software Engineering Skills Competence. I chose that major because I'm interested in programming and algorithms.`,
     description: `Specialized in Software Engineering at SMK Telkom Banjarbaru, focusing on programming fundamentals and algorithmic thinking. Developed strong technical foundations through hands-on projects in web development, database management, and application programming. Mastered multiple programming languages and frameworks, building practical skills in software design, development methodologies, and problem-solving techniques essential for professional software engineering. During my studies, I also actively participated in competitions. In October 2020, I won 2nd place in the Scientific Writing Contest by ByteComp. Later, in May 2021, I secured 1st place in the Scientific Writing Contest by KalPhyCo, where I presented a paper on the utilization of Kalimantan's natural resources potential with appropriate technology.`, 
     technologies: ["Laravel", "MySQL", "HTML", "CSS", "JavaScript", "PHP", "C#", "Java", "Pascal"],
   },
