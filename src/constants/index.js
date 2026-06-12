@@ -74,6 +74,15 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "Production LLM Gateway - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "A model-agnostic gateway that wraps any chat or RAG backend with the production-hardening layer real LLM-platform roles ask for: input and output guardrails, full observability, and a CI evaluation gate. Guardrails (LLM Guard) catch prompt-injection, redact PII (email/phone/credit-card) before anything reaches the model, and block toxicity and banned topics: on a 17-case red-team set it blocks 9/9 attacks, redacts 4/4 PII with zero leaks, and lets 4/4 benign prompts through. Observability traces every request (local JSONL plus optional self-hosted Langfuse) with token cost and latency, fire-and-forget so a tracing outage never breaks a response. A CI eval regression gate (a deterministic reference-recall + groundedness + safety gate, plus an LLM-judged DeepEval/RAGAS layer) fails the build on a quality drop: a deliberately degraded prompt provably trips it. The whole stack, guardrails, evals, and CI included, runs with no API key on a deterministic mock; set a key for the real Gemini Flash model. Four documented war stories (scanner-name collapse in the verdict dict, input vs output scanner signatures, a phone number matching the credit-card regex, a gradio/huggingface-hub version clash).",
+    technologies: ["LLM Guard", "Langfuse", "DeepEval", "RAGAS", "FastAPI", "Gradio", "Gemini", "GitHub Actions"],
+    github: "https://github.com/Fikri645/llm-gateway",
+  },
+  {
     title: "NYC Lakehouse Analytics - 2026",
     type: ["machine-learning"],
     image: null,
