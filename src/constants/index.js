@@ -74,6 +74,15 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "NYC Lakehouse Analytics - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "A medallion-architecture data lakehouse on a full year of NYC Yellow Taxi trips (38.3M rows), all on one laptop at zero cost. PySpark cleans Bronze into a partitioned Apache Iceberg Silver table (35.6M rows at 234k rows/sec, with snapshot time-travel and schema evolution); dbt builds a tested star schema (29 data checks including referential integrity and a no-negative-revenue gate proven to catch an injected bad row); the aggregated gold marts land live in Google BigQuery; a Looker Studio dashboard and an Airflow DAG sit on top. Verified directly in the warehouse: $1.03B annual revenue, 35.6M trips, JFK Airport the busiest pickup zone (1.89M), 18:00 the busiest hour. Tackles the Spark-vs-2026 debate head-on: real PySpark for the job-market keyword plus DuckDB for the modern shift, in one pipeline. Six documented bring-up war stories (S3 path-style on both Spark and the Iceberg REST catalog, INT32/INT64 schema drift across monthly files, MinIO on a Windows bind-mount silently dropping buckets).",
+    technologies: ["PySpark", "Apache Iceberg", "dbt", "DuckDB", "BigQuery", "Looker Studio", "Airflow", "MinIO", "Docker"],
+    github: "https://github.com/Fikri645/lakehouse-analytics",
+  },
+  {
     title: "Real-Time Streaming Fraud Detection - 2026",
     type: ["machine-learning"],
     image: null,
