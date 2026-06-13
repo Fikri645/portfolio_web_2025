@@ -74,6 +74,34 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "Production LLM Gateway - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "A model-agnostic gateway that wraps any chat or RAG backend with the production-hardening layer real LLM-platform roles ask for: input and output guardrails, full observability, and a CI evaluation gate. Guardrails (LLM Guard) catch prompt-injection, redact PII (email/phone/credit-card) before anything reaches the model, and block toxicity and banned topics: on a 17-case red-team set it blocks 9/9 attacks, redacts 4/4 PII with zero leaks, and lets 4/4 benign prompts through. Observability traces every request (local JSONL plus optional self-hosted Langfuse) with token cost and latency, fire-and-forget so a tracing outage never breaks a response. A CI eval regression gate (a deterministic reference-recall + groundedness + safety gate, plus an LLM-judged DeepEval/RAGAS layer) fails the build on a quality drop: a deliberately degraded prompt provably trips it. The whole stack, guardrails, evals, and CI included, runs with no API key on a deterministic mock; set a key for the real Gemini Flash model. Four documented war stories (scanner-name collapse in the verdict dict, input vs output scanner signatures, a phone number matching the credit-card regex, a gradio/huggingface-hub version clash).",
+    technologies: ["LLM Guard", "Langfuse", "DeepEval", "RAGAS", "FastAPI", "Gradio", "Gemini", "GitHub Actions"],
+    github: "https://github.com/Fikri645/llm-gateway",
+  },
+  {
+    title: "NYC Lakehouse Analytics - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "A medallion-architecture data lakehouse on a full year of NYC Yellow Taxi trips (38.3M rows), all on one laptop at zero cost. PySpark cleans Bronze into a partitioned Apache Iceberg Silver table (35.6M rows at 234k rows/sec, with snapshot time-travel and schema evolution); dbt builds a tested star schema (29 data checks including referential integrity and a no-negative-revenue gate proven to catch an injected bad row); the aggregated gold marts land live in Google BigQuery; a Looker Studio dashboard and an Airflow DAG sit on top. Verified directly in the warehouse: $1.03B annual revenue, 35.6M trips, JFK Airport the busiest pickup zone (1.89M), 18:00 the busiest hour. Tackles the Spark-vs-2026 debate head-on: real PySpark for the job-market keyword plus DuckDB for the modern shift, in one pipeline. Six documented bring-up war stories (S3 path-style on both Spark and the Iceberg REST catalog, INT32/INT64 schema drift across monthly files, MinIO on a Windows bind-mount silently dropping buckets).",
+    technologies: ["PySpark", "Apache Iceberg", "dbt", "DuckDB", "BigQuery", "Looker Studio", "Airflow", "MinIO", "Docker"],
+    github: "https://github.com/Fikri645/lakehouse-analytics",
+  },
+  {
+    title: "Real-Time Streaming Fraud Detection - 2026",
+    type: ["machine-learning"],
+    image: null,
+    description:
+      "The same fraud model, three deployment patterns: my batch fraud-detection LightGBM (PR-AUC 0.9666) made to score a live transaction stream. Redpanda (Kafka-compatible) topics, Quix Streams stateful per-card features (1h/24h/7d event-time sliding windows, idempotent by txn_id, out-of-order tolerant), Redis online feature store, micro-batched vectorized scoring, FastAPI + SSE live dashboard. Pre-registered targets all measured and PASSED: end-to-end p99 latency 172ms at 100 TPS (naive baseline was 12.9s — fixed via micro-batching + librdkafka fetch-wait tuning), byte-identical topic replays (875/875 cards, after fixing an at-least-once double-count bug), and 1,500/1,500 scores still flowing with Redis down for 15s. Four documented engineering war stories: the poison pill, the throughput ceiling, the silently-expensive 500ms default, and replay divergence. Closes the streaming/Kafka gap identified in a 3-site Indonesian job-market scan.",
+    technologies: ["Kafka/Redpanda", "Quix Streams", "Redis", "LightGBM", "FastAPI", "SSE", "Docker Compose", "GitHub Actions"],
+    github: "https://github.com/Fikri645/streaming-fraud-detection",
+    demo: "https://fraud-api-340979059251.asia-southeast2.run.app",
+  },
+  {
     title: "Indonesian NLP Fine-Tuning Bake-Off - 2026",
     type: ["machine-learning"],
     image: null,
