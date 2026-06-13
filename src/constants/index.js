@@ -50,7 +50,7 @@ export const EXPERIENCES = [
       "Jupyter Notebook",],
   },
   {
-    year: "September 2021 - March 2025",
+    year: "September 2021 - May 2025",
     role: "Informatics Student",
     company: "Telkom University",
     description: `Pursued undergraduate education in Informatics at Telkom University, building upon my high school specialization. Developed comprehensive expertise in Programming, Computing Systems, and Computer Logic Processes. Applied theoretical knowledge through practical projects, gaining proficiency in multiple programming languages and frameworks while developing strong analytical and problem-solving skills essential for software development and systems engineering. Earned my degree within 3.5 years (7 semesters) with OPES Scholarship, graduating Summa Cum Laude with a GPA of 3.92/4.00. My undergraduate thesis on brain-tumor detection with YOLO models was published as a first-author paper at IEEE ICADEIS 2025.`,
